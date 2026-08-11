@@ -42,6 +42,10 @@ public class UI {
     }
 
     public static void printBoard(ChessPiece[][] pieces) {
+        System.out.println("--------------------------------------------");
+        System.out.println("\t\tCHESS MATCH\t\t");
+        System.out.println("--------------------------------------------");
+        System.out.println();
         for (int i = 0; i < pieces.length; i++) {
             System.out.print((8 - i) + " ");
             for (int j = 0; j < pieces.length; j++) {
@@ -66,5 +70,20 @@ public class UI {
         System.out.print(" ");
     }
 
+    public static void clearScreen() {
+        try {
+            if (System.getProperty("os.name").contains("Windows")) {
+                // Clears the Windows command prompt / PowerShell cleanly
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                // Clears Linux and macOS terminals using ANSI
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+            }
+        } catch (Exception e) {
+            // Fallback option if anything fails
+            for (int i = 0; i < 50; i++) System.out.println();
+        }
+    }
 
 }
